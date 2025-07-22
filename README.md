@@ -1,10 +1,10 @@
-🌍 Global Precipitation Estimation and Climate Data Reconstruction Using Deep Learning
+#🌍 Global Precipitation Estimation and Climate Data Reconstruction Using Deep Learning
 
 Access to high-quality, high-resolution, near-real-time precipitation data is essential for hydrologic research, weather forecasting, and disaster mitigation. While traditional tools like rain gauges and radar networks are effective, they face challenges such as sparse coverage in remote regions and high operational costs. In contrast, satellite-based approaches offer global coverage with higher temporal and spatial resolutions.
 
 Satellite precipitation products such as the Hydro Estimator (HE), IMERG (Integrated Multi-satellitE Retrievals for GPM), and PERSIANN utilize both geostationary infrared (IR) and passive microwave (PMW) observations. While PMW sensors provide detailed atmospheric profiles, they come with greater latency. IR sensors, though limited to cloud-top information, offer rapid refresh rates, making them attractive for real-time precipitation estimation.
 
-🧩 Introducing PERSIANN-UNet (PUnet)
+##🧩 Introducing PERSIANN-UNet (PUnet)
 Recent advances in deep learning, particularly Convolutional Neural Networks (CNNs), have significantly enhanced precipitation estimation capabilities. This project introduces PERSIANN-Unet (PUnet)—a global, deep learning-based satellite precipitation estimation framework that leverages IR data and monthly climatological precipitation inputs.
 
 PUnet produces near-real-time estimates at 0.04° × 0.04° spatial and 30-minute temporal resolution. Unlike many models trained over small regions, PUnet is trained globally using full-disk images, eliminating the need for tiling and avoiding edge artifacts. Key preprocessing steps include image resizing, guided filtering, and quantile mapping, enabling effective global-scale training.
@@ -12,19 +12,19 @@ PUnet produces near-real-time estimates at 0.04° × 0.04° spatial and 30-minut
 The model is evaluated against HE, IMERG, and PDIR-Now over an independent test period (2022–2023), and shows substantial improvements over IR-based baselines in global and regional performance.
 
 <div align="center"> <img width="1800" height="1046" alt="PUnet Workflow" src="https://github.com/user-attachments/assets/6da23218-57a4-498a-95db-399f271c5a60" /> <br/> <em>Flowchart of the proposed PUnet workflow, showing main processing stages.</em> </div>
-Development and Contributors
+## Development and Contributors
 PUnet was developed by researchers at the Center for Hydrometeorology and Remote Sensing (CHRS) at the University of California, Irvine, including Phu Nguyen, Vu Dao, Tu Ung, Claudia Jimenez Arellano, Kuolin Hsu, and Soroosh Sorooshian. The project also involved collaboration with George J. Huffman (NASA GSFC) and F. Martin Ralph (Scripps Institution of Oceanography, UC San Diego).
 
 The primary objective is to provide low-latency, globally available precipitation data with low computational overhead—crucial for applications in forecasting, climate monitoring, and hazard response.
 
-🔑 Key Features of PUnet
+##🔑 Key Features of PUnet
 UNet Architecture: Fully convolutional network tailored for spatial data.
 
 Full Global Processing: Avoids tiling by ingesting the entire image, minimizing edge effects.
 
 Monthly Model Training: Separate training for each calendar month enhances seasonal accuracy.
 
-🧠 Post-Processing Pipeline:
+## 🧠 Post-Processing Pipeline:
 
 Resolution is temporarily downscaled from 0.04° to 0.234° for training.
 
@@ -32,7 +32,7 @@ Bias correction using IMERG Final.
 
 High-resolution restoration using guided filtering on original IR input.
 
-🧪 Model Evaluation
+##🧪 Model Evaluation
 Evaluation shows that PUnet outperforms IR-based products such as PDIR-Now and HE, particularly in metrics like correlation, RMSE, and MAE. It aligns well with IMERG Final, especially in tropical and midlatitude regions. While IMERG remains strongest over CONUS, PUnet provides competitive performance and robust detection capabilities.
 
 PUnet also shows promise in capturing extreme precipitation events. For example, it performed well during a Western U.S. event, avoiding overestimation seen in other products and maintaining low bias and RMSE. For indices such as R10mm, CDD, and CWD, PUnet showed good agreement with ground truth, though it may slightly overestimate total rainfall from very wet days.
